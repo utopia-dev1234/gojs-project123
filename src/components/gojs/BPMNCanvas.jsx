@@ -452,13 +452,13 @@ const BPMNCanvas = () => {
   return (
     <div className="w-full h-full flex flex-col">
       {/* Toolbar */}
-      <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shadow-sm">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-3 flex items-center justify-between shadow-sm">
         <div>
-          <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-            <Workflow className="w-5 h-5 text-indigo-600" />
+          <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+            <Workflow className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             BPMN Workflow Designer
           </h2>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Business Process Model and Notation
           </p>
         </div>
@@ -532,12 +532,12 @@ const BPMNCanvas = () => {
       </div>
 
       {/* Canvas */}
-      <div className="flex-1 bg-gray-50 relative">
+      <div className="flex-1 bg-gray-50 dark:bg-gray-900 relative">
         <div ref={divRef} className="w-full h-full" />
       </div>
 
       {/* Status Bar */}
-      <div className="bg-white border-t border-gray-200 px-6 py-2 flex items-center justify-between text-sm text-gray-600">
+      <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-2 flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
         <div>
           Nodes: {diagram ? diagram.model.nodeDataArray.length : 0} | Links:{' '}
           {diagram ? diagram.links.count : 0}
