@@ -19,6 +19,15 @@ const Sidebar = () => {
 
   const canvasTypes = [
     {
+      id: 'theme',
+      name: 'Theme Demo',
+      icon: Sparkles,
+      description: 'Test theme toggle',
+      color: 'text-pink-600',
+      bgColor: 'bg-pink-100',
+      category: 'Demo',
+    },
+    {
       id: 'orgchart',
       name: 'Organization Chart',
       icon: Users,
