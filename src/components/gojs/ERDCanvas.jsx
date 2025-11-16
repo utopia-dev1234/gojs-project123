@@ -120,12 +120,13 @@ const ERDCanvas = () => {
           },
           new go.Binding('text', 'name').makeTwoWay()
         ),
-        $(go.Shape, 'LineH', {
+        $(go.Shape, 'Rectangle', {
           row: 1,
           column: 0,
           stretch: go.GraphObject.Horizontal,
-          stroke: '#D1D5DB',
-          strokeWidth: 1,
+          stroke: null,
+          fill: '#D1D5DB',
+          height: 1,
         }),
         $(
           go.Panel,
