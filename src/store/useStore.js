@@ -26,7 +26,7 @@ const useStore = create(
       }),
 
     // Active Canvas/Diagram Type
-    activeCanvas: 'theme',
+    activeCanvas: 'orgchart',
     setActiveCanvas: (canvas) => set({ activeCanvas: canvas }),
 
     // Diagram Data Storage

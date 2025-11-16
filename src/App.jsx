@@ -9,7 +9,6 @@ import BPMNCanvas from './components/gojs/BPMNCanvas'
 import ERDCanvas from './components/gojs/ERDCanvas'
 import NetworkCanvas from './components/gojs/NetworkCanvas'
 import GanttCanvas from './components/gojs/GanttCanvas'
-import ThemeDemo from './components/ThemeDemo'
 import useStore from './store/useStore'
 
 function App() {
@@ -26,8 +25,6 @@ function App() {
 
   const renderCanvas = () => {
     switch (activeCanvas) {
-      case 'theme':
-        return <ThemeDemo />
       case 'orgchart':
         return <OrgChartCanvas />
       case 'bpmn':
@@ -47,7 +44,7 @@ function App() {
       case 'process':
         return <ProcessCanvas />
       default:
-        return <ThemeDemo />
+        return <OrgChartCanvas />
     }
   }
 
