@@ -199,7 +199,7 @@ const BPMNCanvas = () => {
       go.Node,
       'Auto',
       nodeStyle(),
-      $(go.Shape, 'File', {
+      $(go.Shape, 'Rectangle', {
         fill: '#E0E7FF',
         strokeWidth: 2,
         stroke: '#818CF8',
