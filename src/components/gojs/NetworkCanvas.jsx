@@ -128,10 +128,10 @@ const NetworkCanvas = () => {
 
     templatesMap.add('server', makeNodeTemplate('Rectangle', '#6366F1', '#4338CA'))
     templatesMap.add('router', makeNodeTemplate('Diamond', '#F59E0B', '#D97706'))
-    templatesMap.add('firewall', makeNodeTemplate('Pentagon', '#EF4444', '#DC2626'))
-    templatesMap.add('switch', makeNodeTemplate('Hexagon', '#8B5CF6', '#7C3AED'))
-    templatesMap.add('client', makeNodeTemplate('Ellipse', '#3B82F6', '#2563EB'))
-    templatesMap.add('cloud', makeNodeTemplate('Cloud', '#10B981', '#059669'))
+    templatesMap.add('firewall', makeNodeTemplate('TriangleUp', '#EF4444', '#DC2626'))
+    templatesMap.add('switch', makeNodeTemplate('Ellipse', '#8B5CF6', '#7C3AED'))
+    templatesMap.add('client', makeNodeTemplate('Circle', '#3B82F6', '#2563EB'))
+    templatesMap.add('cloud', makeNodeTemplate('RoundedRectangle', '#10B981', '#059669'))
     templatesMap.add('database', makeNodeTemplate('Cylinder1', '#EC4899', '#DB2777'))
 
     myDiagram.nodeTemplateMap = templatesMap
