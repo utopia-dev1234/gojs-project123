@@ -1,18 +1,32 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
+// Load theme from localStorage
+const getInitialTheme = () => {
+  if (typeof window !== 'undefined') {
+    const savedTheme = localStorage.getItem('diagram-pro-theme')
+    return savedTheme || 'light'
+  }
+  return 'light'
+}
+
 const useStore = create(
   immer((set) => ({
     // Theme Management
-    theme: 'light',
-    setTheme: (theme) => set({ theme }),
+    theme: getInitialTheme(),
+    setTheme: (theme) => {
+      localStorage.setItem('diagram-pro-theme', theme)
+      set({ theme })
+    },
     toggleTheme: () =>
-      set((state) => ({
-        theme: state.theme === 'light' ? 'dark' : 'light',
-      })),
+      set((state) => {
+        const newTheme = state.theme === 'light' ? 'dark' : 'light'
+        localStorage.setItem('diagram-pro-theme', newTheme)
+        return { theme: newTheme }
+      }),
 
     // Active Canvas/Diagram Type
-    activeCanvas: 'orgchart',
+    activeCanvas: 'theme',
     setActiveCanvas: (canvas) => set({ activeCanvas: canvas }),
 
     // Diagram Data Storage
