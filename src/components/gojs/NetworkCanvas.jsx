@@ -132,7 +132,7 @@ const NetworkCanvas = () => {
     templatesMap.add('switch', makeNodeTemplate('Ellipse', '#8B5CF6', '#7C3AED'))
     templatesMap.add('client', makeNodeTemplate('Circle', '#3B82F6', '#2563EB'))
     templatesMap.add('cloud', makeNodeTemplate('RoundedRectangle', '#10B981', '#059669'))
-    templatesMap.add('database', makeNodeTemplate('Cylinder1', '#EC4899', '#DB2777'))
+    templatesMap.add('database', makeNodeTemplate('Rectangle', '#EC4899', '#DB2777'))
 
     myDiagram.nodeTemplateMap = templatesMap
 

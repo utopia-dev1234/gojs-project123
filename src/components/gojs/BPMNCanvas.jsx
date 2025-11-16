@@ -177,19 +177,10 @@ const BPMNCanvas = () => {
           },
           new go.Binding('text', 'text').makeTwoWay()
         ),
-        $(go.Shape, 'Rectangle', {
-          fill: null,
+        $(go.TextBlock, '+', {
+          font: 'bold 20px Inter, sans-serif',
           stroke: 'white',
-          strokeWidth: 2,
-          desiredSize: new go.Size(14, 14),
           margin: new go.Margin(5, 0, 0, 0),
-        }),
-        $(go.Shape, 'PlusLine', {
-          fill: null,
-          stroke: 'white',
-          strokeWidth: 2,
-          desiredSize: new go.Size(10, 10),
-          margin: new go.Margin(-12, 0, 0, 0),
         })
       )
     )
