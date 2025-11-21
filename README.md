@@ -27,6 +27,7 @@ DiagramPro is a professional-grade diagramming application that combines the pow
 - ✅ **Real-time Editing** - Live updates and editing
 - ✅ **Properties Panel** - Dynamic node configuration
 - ✅ **Responsive Design** - Works on all screen sizes
+- ✅ **🎯 WalkMe Integration** - In-app guidance and walkthroughs for all diagram types
 
 ---
 

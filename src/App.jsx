@@ -9,6 +9,12 @@ import BPMNCanvas from './components/gojs/BPMNCanvas'
 import ERDCanvas from './components/gojs/ERDCanvas'
 import NetworkCanvas from './components/gojs/NetworkCanvas'
 import GanttCanvas from './components/gojs/GanttCanvas'
+import { WalkMeProvider } from './components/walkme/WalkMeProvider'
+import Walkthrough from './components/walkme/Walkthrough'
+import WalkMeLauncher from './components/walkme/WalkMeLauncher'
+import SmartTips from './components/walkme/SmartTips'
+import TaskList from './components/walkme/TaskList'
+import AnalyticsPanel from './components/walkme/AnalyticsPanel'
 import useStore from './store/useStore'
 
 function App() {
@@ -49,12 +55,19 @@ function App() {
   }
 
   return (
-    <div className={`flex h-screen w-screen ${theme === 'dark' ? 'dark' : ''}`}>
-      <Sidebar />
-      <div className="flex-1 flex flex-col bg-gray-50 dark:bg-gray-900">
-        {renderCanvas()}
+    <WalkMeProvider>
+      <div className={`flex h-screen w-screen ${theme === 'dark' ? 'dark' : ''}`}>
+        <Sidebar />
+        <div className="flex-1 flex flex-col bg-gray-50 dark:bg-gray-900">
+          {renderCanvas()}
+        </div>
+        <Walkthrough />
+        <SmartTips />
+        <TaskList />
+        <WalkMeLauncher />
+        <AnalyticsPanel />
       </div>
-    </div>
+    </WalkMeProvider>
   )
 }
 
