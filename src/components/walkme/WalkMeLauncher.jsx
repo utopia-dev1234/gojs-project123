@@ -98,17 +98,19 @@ const WalkMeLauncher = () => {
 
                 <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                    Current: {canvasNames[activeCanvas]}
+                    Current: {canvasNames[activeCanvas] || 'Unknown'}
                   </p>
-                  <button
-                    onClick={() => {
-                      startWalkthrough(activeCanvas)
-                      setShowMenu(false)
-                    }}
-                    className="w-full text-left px-3 py-2 text-xs text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-                  >
-                    Learn {canvasNames[activeCanvas]}
-                  </button>
+                  {activeCanvas && (
+                    <button
+                      onClick={() => {
+                        startWalkthrough(activeCanvas)
+                        setShowMenu(false)
+                      }}
+                      className="w-full text-left px-3 py-2 text-xs text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+                    >
+                      Learn {canvasNames[activeCanvas]}
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

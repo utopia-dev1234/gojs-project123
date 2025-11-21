@@ -50,7 +50,7 @@ const Walkthrough = () => {
 
   // Track step views
   useEffect(() => {
-    if (currentWalkthrough) {
+    if (currentWalkthrough && walkthroughSteps[currentWalkthrough]) {
       const steps = walkthroughSteps[currentWalkthrough] || []
       const currentStepData = steps[currentStep]
       if (currentStepData) {
@@ -61,7 +61,9 @@ const Walkthrough = () => {
 
   if (!currentWalkthrough) return null
 
-  const steps = walkthroughSteps[currentWalkthrough] || []
+  const steps = walkthroughSteps[currentWalkthrough]
+  if (!steps || !Array.isArray(steps)) return null
+  
   const step = steps[currentStep]
 
   if (!step) {

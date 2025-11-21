@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import useStore from '../../store/useStore'
 
 // WalkMe Context
@@ -24,37 +24,25 @@ export const WalkMeProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : []
   })
 
-  // Check if walkthrough should auto-start for new users
-  useEffect(() => {
-    const isFirstVisit = !localStorage.getItem('walkme_first_visit')
-    if (isFirstVisit && activeCanvas === 'orgchart') {
-      // Auto-start org chart walkthrough for first-time users
-      setTimeout(() => {
-        startWalkthrough('orgchart')
-        localStorage.setItem('walkme_first_visit', 'true')
-      }, 1000)
-    }
-  }, [activeCanvas])
-
-  const startWalkthrough = (canvasType) => {
+  const startWalkthrough = useCallback((canvasType) => {
     setCurrentWalkthrough(canvasType)
     setCurrentStep(0)
-  }
+  }, [])
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     setCurrentStep(prev => prev + 1)
-  }
+  }, [])
 
-  const previousStep = () => {
+  const previousStep = useCallback(() => {
     setCurrentStep(prev => Math.max(0, prev - 1))
-  }
+  }, [])
 
-  const skipWalkthrough = () => {
+  const skipWalkthrough = useCallback(() => {
     setCurrentWalkthrough(null)
     setCurrentStep(0)
-  }
+  }, [])
 
-  const completeWalkthrough = (canvasType) => {
+  const completeWalkthrough = useCallback((canvasType) => {
     setCompletedWalkthroughs(prev => {
       const updated = [...prev, canvasType]
       localStorage.setItem('walkme_completed', JSON.stringify(updated))
@@ -62,17 +50,34 @@ export const WalkMeProvider = ({ children }) => {
     })
     setCurrentWalkthrough(null)
     setCurrentStep(0)
-  }
+  }, [])
 
-  const toggleTips = () => {
+  const toggleTips = useCallback(() => {
     setShowTips(prev => !prev)
-  }
+  }, [])
 
-  const toggleTaskList = () => {
+  const toggleTaskList = useCallback(() => {
     setShowTaskList(prev => !prev)
-  }
+  }, [])
 
-  const value = {
+  // Check if walkthrough should auto-start for new users
+  useEffect(() => {
+    const isFirstVisit = !localStorage.getItem('walkme_first_visit')
+    if (isFirstVisit && activeCanvas === 'orgchart') {
+      // Auto-start org chart walkthrough for first-time users
+      setTimeout(() => {
+        setCurrentWalkthrough('orgchart')
+        setCurrentStep(0)
+        localStorage.setItem('walkme_first_visit', 'true')
+      }, 1000)
+    }
+  }, [activeCanvas])
+
+  const isCompleted = useCallback((canvasType) => {
+    return completedWalkthroughs.includes(canvasType)
+  }, [completedWalkthroughs])
+
+  const value = useMemo(() => ({
     currentWalkthrough,
     currentStep,
     showTips,
@@ -85,9 +90,24 @@ export const WalkMeProvider = ({ children }) => {
     completeWalkthrough,
     toggleTips,
     toggleTaskList,
-    isCompleted: (canvasType) => completedWalkthroughs.includes(canvasType),
+    isCompleted,
     activeCanvas, // Expose activeCanvas for components
-  }
+  }), [
+    currentWalkthrough,
+    currentStep,
+    showTips,
+    showTaskList,
+    completedWalkthroughs,
+    startWalkthrough,
+    nextStep,
+    previousStep,
+    skipWalkthrough,
+    completeWalkthrough,
+    toggleTips,
+    toggleTaskList,
+    isCompleted,
+    activeCanvas
+  ])
 
   return (
     <WalkMeContext.Provider value={value}>
