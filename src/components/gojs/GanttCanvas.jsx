@@ -409,6 +409,7 @@ const GanttCanvas = () => {
           </button>
           <button
             onClick={exportImage}
+            data-export-button
             className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-sm"
           >
             <Download className="w-4 h-4" />
@@ -438,7 +439,7 @@ const GanttCanvas = () => {
 
       {/* Canvas */}
       <div className="flex-1 bg-gray-50 dark:bg-gray-900 relative overflow-auto">
-        <div ref={divRef} className="w-full h-full min-w-[2000px]" />
+        <div ref={divRef} className="w-full h-full min-w-[2000px] gojs-canvas" data-gojs-canvas="gantt" />
       </div>
 
       {/* Status Bar */}

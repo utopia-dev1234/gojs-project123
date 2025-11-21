@@ -1,281 +1,454 @@
 // Walkthrough configurations for each diagram type
 
 export const walkthroughSteps = {
+  // General GoJS Project Overview
+  gojs_overview: [
+    {
+      title: 'Welcome to the GoJS Diagramming Suite',
+      description: 'This project showcases GoJS, a powerful JavaScript library for building interactive diagrams. All 5 diagram types (Org Chart, BPMN, ERD, Network, Gantt) are built with GoJS.',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'Built with GoJS library',
+        '5 GoJS-powered diagram types',
+        'Interactive and customizable',
+        'Professional diagramming features'
+      ]
+    },
+    {
+      title: 'What is GoJS?',
+      description: 'GoJS is a JavaScript library for creating interactive diagrams. It provides nodes, links, layouts, and tools for building complex diagramming applications.',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'GoJS = Interactive diagrams',
+        'Nodes, Links, Layouts',
+        'Built-in tools and commands',
+        'Extensible and customizable'
+      ]
+    },
+    {
+      title: 'GoJS Core Features',
+      description: 'All GoJS diagrams include: Undo/Redo (Ctrl+Z/Y), Zoom & Pan, Context Menus, Data Binding, Layouts, and Export/Import. These work automatically!',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'Undo/Redo: Ctrl+Z / Ctrl+Y',
+        'Zoom: Mouse wheel or toolbar',
+        'Pan: Drag empty canvas',
+        'Context menus: Right-click nodes'
+      ]
+    },
+    {
+      title: 'GoJS Diagram Types',
+      description: 'This project includes 5 GoJS diagrams: Organization Chart (TreeLayout), BPMN (LayeredDigraphLayout), ERD (LayeredDigraphLayout), Network (ForceDirectedLayout), and Gantt (TreeLayout).',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'Org Chart: TreeLayout',
+        'BPMN: LayeredDigraphLayout',
+        'ERD: LayeredDigraphLayout',
+        'Network: ForceDirectedLayout',
+        'Gantt: TreeLayout with dates'
+      ]
+    },
+    {
+      title: 'GoJS Model System',
+      description: 'GoJS uses a Model-View architecture. The Model stores data (nodes, links), the Diagram displays it. Changes to model automatically update the diagram.',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'Model stores data',
+        'Diagram displays model',
+        'Two-way data binding',
+        'Automatic updates'
+      ]
+    },
+    {
+      title: 'GoJS Export/Import',
+      description: 'Export diagrams using model.toJson() for JSON or makeImageData() for PNG. Import JSON restores the complete GoJS model state perfectly.',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'JSON: model.toJson()',
+        'PNG: makeImageData()',
+        'Perfect restoration',
+        'Preserves all properties'
+      ]
+    },
+    {
+      title: 'Start Exploring',
+      description: 'Select any diagram type from the sidebar to explore GoJS features. Each diagram demonstrates different GoJS capabilities and layouts.',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'Click sidebar to switch',
+        'Each type shows GoJS features',
+        'Try undo/redo',
+        'Right-click for menus'
+      ]
+    }
+  ],
+
   orgchart: [
     {
-      title: 'Welcome to Organization Chart',
-      description: 'Create hierarchical organizational structures. This walkthrough will guide you through creating your first org chart.',
+      title: 'Welcome to GoJS Organization Chart',
+      description: 'This is a powerful GoJS-powered diagramming tool. GoJS provides interactive, customizable diagrams with built-in features like undo/redo, zoom, pan, and context menus. Let\'s explore!',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Perfect for company structures',
-        'Shows reporting relationships',
-        'Supports photos and avatars'
+        'Built with GoJS library',
+        'Supports undo/redo (Ctrl+Z/Ctrl+Y)',
+        'Zoom with mouse wheel or toolbar',
+        'Right-click for context menus'
       ]
     },
     {
-      title: 'Add Root Node',
-      description: 'Click on the canvas to add your first node (CEO or top-level manager). Double-click to edit the name.',
-      targetSelector: '.gojs-canvas, canvas',
+      title: 'The GoJS Canvas',
+      description: 'This is the GoJS diagram canvas. Click anywhere to add nodes, drag to pan, scroll to zoom. GoJS handles all interactions automatically.',
+      targetSelector: '[data-gojs-canvas="orgchart"]',
       position: 'bottom',
       tips: [
-        'Start with the top-level position',
-        'Double-click nodes to edit',
-        'Drag nodes to reposition'
+        'Click canvas to add nodes',
+        'Scroll to zoom in/out',
+        'Drag empty space to pan',
+        'Double-click nodes to edit text'
       ]
     },
     {
-      title: 'Add Subordinates',
-      description: 'Right-click on a node and select "Add Report" to add team members below them.',
+      title: 'Add Nodes',
+      description: 'Click the "Add Employee" button or click directly on the canvas. GoJS automatically handles node creation and layout.',
+      targetSelector: '[data-walkme-target="add-node-button"]',
+      position: 'bottom',
+      tips: [
+        'Use toolbar button or click canvas',
+        'GoJS auto-positions new nodes',
+        'Nodes are automatically linked',
+        'Undo with Ctrl+Z if needed'
+      ]
+    },
+    {
+      title: 'GoJS Context Menu',
+      description: 'Right-click any node to see the GoJS context menu. This provides quick actions like "Add Report", "Delete", and "Change Color".',
+      targetSelector: '[data-gojs-canvas="orgchart"]',
+      position: 'center',
+      tips: [
+        'Right-click any node',
+        'Context menu appears automatically',
+        'GoJS handles menu positioning',
+        'All actions are undoable'
+      ]
+    },
+    {
+      title: 'GoJS Zoom Controls',
+      description: 'Use the zoom buttons in the toolbar or mouse wheel. GoJS provides smooth zoom animations and maintains diagram state.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Right-click for context menu',
-        'Add multiple levels of hierarchy',
-        'Organize by department'
+        'Zoom In/Out buttons in toolbar',
+        'Mouse wheel to zoom',
+        'Zoom to Fit centers diagram',
+        'GoJS preserves zoom on undo/redo'
       ]
     },
     {
-      title: 'Customize Appearance',
-      description: 'Select a node and use the Properties Panel on the right to change colors, add photos, or modify details.',
+      title: 'Properties Panel',
+      description: 'Select a node to see its properties. Changes update the GoJS model in real-time. All changes support undo/redo.',
       targetSelector: '[data-properties-panel]',
       position: 'left',
       tips: [
-        'Change node colors',
-        'Add employee photos',
-        'Customize text and styling'
+        'Select node to see properties',
+        'Changes update immediately',
+        'GoJS model updates automatically',
+        'Use Ctrl+Z to undo changes'
       ]
     },
     {
-      title: 'Export Your Chart',
-      description: 'Use the export button in the sidebar to save your org chart as PNG, PDF, or JSON.',
+      title: 'Export with GoJS',
+      description: 'Export your diagram as PNG (using GoJS makeImageData) or JSON (using GoJS model.toJson). GoJS handles all export logic.',
       targetSelector: '[data-export-button]',
       position: 'left',
       tips: [
-        'PNG for presentations',
-        'PDF for documents',
-        'JSON to save and reload'
+        'PNG uses GoJS makeImageData',
+        'JSON uses model.toJson',
+        'Exports preserve all data',
+        'Import JSON to restore'
       ]
     }
   ],
 
   bpmn: [
     {
-      title: 'Welcome to BPMN Workflow Designer',
-      description: 'Design business process workflows using BPMN 2.0 standards. Let\'s create your first workflow.',
+      title: 'Welcome to GoJS BPMN Designer',
+      description: 'This BPMN workflow designer is built with GoJS, featuring multiple node templates, custom layouts, and interactive linking. GoJS handles all the complex diagram logic.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'BPMN 2.0 compliant',
-        'Standard process notation',
-        'Perfect for SOPs'
+        'GoJS multi-template system',
+        'Custom node categories',
+        'Interactive linking tool',
+        'LayeredDigraphLayout auto-arranges'
       ]
     },
     {
-      title: 'Add Start Event',
-      description: 'Drag a Start Event (green circle) from the palette to begin your process flow.',
-      targetSelector: '.gojs-canvas, canvas',
+      title: 'GoJS Node Templates',
+      description: 'GoJS uses different templates for each BPMN element type. Click the toolbar buttons to add nodes - GoJS creates the appropriate template automatically.',
+      targetSelector: '[data-gojs-canvas="bpmn"]',
       position: 'bottom',
       tips: [
-        'Every process starts here',
-        'Green circle = Start',
-        'Drag from palette'
+        'Each button creates specific template',
+        'Templates defined in GoJS',
+        'Custom shapes and colors',
+        'Double-click to edit text'
       ]
     },
     {
-      title: 'Add Tasks',
-      description: 'Add Task nodes (blue rectangles) to represent process steps. Connect them with arrows.',
-      targetSelector: null,
+      title: 'GoJS Linking Tool',
+      description: 'Drag from one node to another to create connections. GoJS LinkingTool handles all the connection logic, routing, and validation automatically.',
+      targetSelector: '[data-gojs-canvas="bpmn"]',
       position: 'center',
       tips: [
-        'Blue = Task/Activity',
-        'Connect with arrows',
-        'Add descriptions'
+        'Drag from node port to another',
+        'GoJS auto-routes connections',
+        'AvoidsNodes routing enabled',
+        'JumpOver for crossing links'
       ]
     },
     {
-      title: 'Add Decision Points',
-      description: 'Use Gateway nodes (orange diamonds) for decision points. Label the paths (Yes/No, Approved/Rejected).',
+      title: 'GoJS Layout System',
+      description: 'GoJS uses LayeredDigraphLayout to automatically arrange nodes. The layout runs automatically and maintains proper spacing and alignment.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Orange diamond = Decision',
-        'Label each path',
-        'X = XOR gateway'
+        'Automatic layout on changes',
+        'LayeredDigraphLayout algorithm',
+        'Maintains hierarchy',
+        'Configurable spacing'
       ]
     },
     {
-      title: 'Add End Event',
-      description: 'Complete your workflow with an End Event (red circle). Every process should have a clear end.',
+      title: 'GoJS Undo/Redo',
+      description: 'All actions support undo/redo. Press Ctrl+Z to undo, Ctrl+Y to redo. GoJS UndoManager tracks all changes automatically.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Red circle = End',
-        'Multiple ends allowed',
-        'Validate your process'
+        'Ctrl+Z to undo',
+        'Ctrl+Y to redo',
+        'GoJS UndoManager enabled',
+        'Tracks all model changes'
+      ]
+    },
+    {
+      title: 'Export GoJS Model',
+      description: 'Export as PNG (GoJS makeImageData) or JSON (model.toJson). The JSON format preserves all GoJS model data for perfect restoration.',
+      targetSelector: '[data-export-button]',
+      position: 'left',
+      tips: [
+        'PNG: GoJS makeImageData',
+        'JSON: model.toJson',
+        'Preserves all properties',
+        'Import restores exactly'
       ]
     }
   ],
 
   erd: [
     {
-      title: 'Welcome to ERD Designer',
-      description: 'Design database schemas with Entity Relationship Diagrams. Create tables, relationships, and export to SQL.',
+      title: 'Welcome to GoJS ERD Designer',
+      description: 'This ERD designer uses GoJS for interactive database modeling. GoJS provides custom node templates with nested panels for entities and attributes.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Database schema design',
-        'Export to SQL',
-        'Visual data modeling'
+        'GoJS nested panel templates',
+        'Custom attribute rendering',
+        'Interactive relationship lines',
+        'LayeredDigraphLayout for arrangement'
       ]
     },
     {
-      title: 'Create Entities',
-      description: 'Click to add entity boxes. Each entity represents a database table.',
-      targetSelector: '.gojs-canvas, canvas',
+      title: 'GoJS Entity Templates',
+      description: 'Each entity is a GoJS node with nested panels. The outer panel is the entity box, inner panels show attributes with custom shapes for keys.',
+      targetSelector: '[data-gojs-canvas="erd"]',
       position: 'bottom',
       tips: [
-        'Each box = database table',
-        'Name your entities clearly',
-        'Use singular nouns'
+        'GoJS Panel nesting',
+        'Custom shapes for PK/FK',
+        'Editable text blocks',
+        'Auto-sizing panels'
       ]
     },
     {
-      title: 'Add Attributes',
-      description: 'Double-click an entity to add attributes (columns). Mark Primary Keys with yellow diamond, Foreign Keys with red square.',
+      title: 'GoJS Data Binding',
+      description: 'Attributes use GoJS data binding to display and edit data. Changes update the model automatically with two-way binding.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Yellow diamond = Primary Key',
-        'Red square = Foreign Key',
-        'Blue circle = Regular attribute'
+        'Two-way data binding',
+        'makeTwoWay() bindings',
+        'Real-time updates',
+        'Undo/redo supported'
       ]
     },
     {
-      title: 'Create Relationships',
-      description: 'Connect entities with lines to show relationships. Label cardinality (1, N, 1:N, M:N).',
+      title: 'GoJS Links for Relationships',
+      description: 'Relationships are GoJS Links between entities. They show cardinality and can be edited. GoJS handles routing automatically.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'One-to-Many: 1:N',
-        'Many-to-Many: M:N',
-        'One-to-One: 1:1'
+        'GoJS Link objects',
+        'Custom link templates',
+        'Labeled with cardinality',
+        'Auto-routing enabled'
       ]
     },
     {
-      title: 'Export to SQL',
-      description: 'Use the Export button and select SQL to generate CREATE TABLE statements automatically.',
+      title: 'GoJS Model Export',
+      description: 'Export uses GoJS model.toJson() to save all entity and relationship data. Import restores the complete GoJS model state.',
       targetSelector: '[data-export-button]',
       position: 'left',
       tips: [
-        'Generates CREATE TABLE',
-        'Includes PRIMARY KEY',
-        'Includes FOREIGN KEY constraints'
+        'model.toJson() for JSON',
+        'Preserves all attributes',
+        'Includes relationships',
+        'Perfect restoration'
       ]
     }
   ],
 
   network: [
     {
-      title: 'Welcome to Network Topology Designer',
-      description: 'Design network infrastructure diagrams. Map servers, routers, switches, and connections.',
+      title: 'Welcome to GoJS Network Designer',
+      description: 'This network topology tool uses GoJS ForceDirectedLayout for automatic device arrangement. GoJS handles physics-based positioning and connection routing.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'IT infrastructure mapping',
-        'Network documentation',
-        'System architecture'
+        'GoJS ForceDirectedLayout',
+        'Physics-based positioning',
+        'Automatic node spacing',
+        'Interactive device placement'
       ]
     },
     {
-      title: 'Add Devices',
-      description: 'Add network devices from the palette: Servers (blue), Routers (orange), Switches (purple), Firewalls (red).',
-      targetSelector: '.gojs-canvas, canvas',
+      title: 'GoJS Node Templates',
+      description: 'Each device type uses a custom GoJS template with specific shapes and colors. Templates are defined using GraphObject.make for consistent rendering.',
+      targetSelector: '[data-gojs-canvas="network"]',
       position: 'bottom',
       tips: [
-        'Different shapes = different devices',
-        'Color-coded by type',
-        'Add IP addresses'
+        'Custom GoJS templates',
+        'Shape-based device types',
+        'Consistent styling',
+        'Icon-based identification'
       ]
     },
     {
-      title: 'Connect Devices',
-      description: 'Draw connections between devices. Label connections with bandwidth (e.g., "1 Gbps").',
+      title: 'GoJS Force Layout',
+      description: 'GoJS ForceDirectedLayout automatically arranges devices using physics simulation. Devices repel each other, connections create attraction.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Show network paths',
-        'Label bandwidth',
-        'Document connections'
+        'Physics simulation',
+        'Auto-spacing',
+        'Configurable forces',
+        'Smooth animations'
       ]
     },
     {
-      title: 'Configure Properties',
-      description: 'Select a device and use the Properties Panel to add IP addresses, hostnames, and other details.',
-      targetSelector: '[data-properties-panel]',
+      title: 'GoJS Connections',
+      description: 'Network connections are GoJS Links. They can be labeled, styled, and automatically route around nodes. GoJS handles all connection logic.',
+      targetSelector: null,
+      position: 'center',
+      tips: [
+        'GoJS Link objects',
+        'Labeled connections',
+        'Auto-routing',
+        'Interactive editing'
+      ]
+    },
+    {
+      title: 'GoJS Model Persistence',
+      description: 'Save your network diagram using GoJS model.toJson(). This preserves all device positions, connections, and properties perfectly.',
+      targetSelector: '[data-export-button]',
       position: 'left',
       tips: [
-        'Add IP addresses',
-        'Document device specs',
-        'Track device status'
+        'model.toJson() export',
+        'Preserves positions',
+        'Includes all properties',
+        'Perfect restoration'
       ]
     }
   ],
 
   gantt: [
     {
-      title: 'Welcome to Gantt Chart',
-      description: 'Create project timelines and track task progress. Visualize project schedules with this Gantt chart.',
+      title: 'Welcome to GoJS Gantt Chart',
+      description: 'This Gantt chart uses GoJS TreeLayout with custom date-to-coordinate conversion. GoJS handles task positioning, resizing, and dependency linking.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Project timeline planning',
-        'Task dependencies',
-        'Progress tracking'
+        'GoJS TreeLayout',
+        'Custom coordinate system',
+        'Date-based positioning',
+        'Resizable task bars'
       ]
     },
     {
-      title: 'Add Tasks',
-      description: 'Click on the timeline to add tasks. Each task appears as a bar on the timeline.',
-      targetSelector: '.gojs-canvas, canvas',
+      title: 'GoJS Date Conversion',
+      description: 'GoJS converts dates to canvas coordinates automatically. Task bars are positioned based on start dates and sized by duration.',
+      targetSelector: '[data-gojs-canvas="gantt"]',
       position: 'bottom',
       tips: [
-        'Tasks show as bars',
-        'Duration = bar length',
-        'Color-coded by type'
+        'Date to pixel conversion',
+        '20px per day scale',
+        'Automatic positioning',
+        'Timeline from Jan-May 2024'
       ]
     },
     {
-      title: 'Set Duration',
-      description: 'Drag the edges of task bars to adjust duration. The timeline shows dates from Jan to May 2024.',
+      title: 'GoJS Resizable Nodes',
+      description: 'Task bars are GoJS nodes with resizable=true. Drag edges to change duration, drag bar to change start date. GoJS handles all resizing logic.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Drag to resize',
-        'Drag to reposition',
-        'See duration in days'
+        'resizable=true property',
+        'Drag edges to resize',
+        'Drag bar to move',
+        'Updates model automatically'
       ]
     },
     {
-      title: 'Link Dependencies',
-      description: 'Connect tasks with arrows to show dependencies. A task can depend on multiple predecessors.',
+      title: 'GoJS Dependency Links',
+      description: 'Task dependencies are GoJS Links showing predecessor relationships. GoJS TreeLayout arranges tasks hierarchically based on dependencies.',
       targetSelector: null,
       position: 'center',
       tips: [
-        'Arrows show dependencies',
-        'Task B depends on Task A',
-        'Critical path highlighted'
+        'GoJS Link for dependencies',
+        'TreeLayout hierarchy',
+        'Visual dependency chains',
+        'Critical path support'
       ]
     },
     {
-      title: 'Track Progress',
-      description: 'Update progress percentage in the Properties Panel. Visual progress bars show completion status.',
+      title: 'GoJS Progress Binding',
+      description: 'Progress is bound to GoJS model data. Changes update visual progress bars automatically through GoJS data binding.',
       targetSelector: '[data-properties-panel]',
       position: 'left',
       tips: [
-        'Set progress percentage',
+        'Data binding for progress',
         'Visual progress bars',
-        'Track milestones'
+        'Real-time updates',
+        'Model-driven display'
+      ]
+    },
+    {
+      title: 'Export GoJS Gantt',
+      description: 'Export preserves all task data, dates, durations, and dependencies using GoJS model.toJson(). Perfect for project management integration.',
+      targetSelector: '[data-export-button]',
+      position: 'left',
+      tips: [
+        'model.toJson() export',
+        'Preserves all dates',
+        'Includes dependencies',
+        'Project management ready'
       ]
     }
   ],

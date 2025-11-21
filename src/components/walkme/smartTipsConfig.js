@@ -3,149 +3,177 @@
 export const smartTipsConfig = {
   orgchart: [
     {
-      id: 'tip-add-node',
-      title: 'Add Node',
-      description: 'Click on the canvas to add a new node. Double-click to edit the name immediately.',
-      targetSelector: '.gojs-canvas, canvas',
-      shortcut: 'Click'
+      id: 'tip-gojs-canvas',
+      title: 'GoJS Canvas',
+      description: 'This is a GoJS diagram canvas. GoJS handles all interactions: clicking, dragging, zooming, panning. Built-in features work automatically.',
+      targetSelector: '[data-gojs-canvas="orgchart"]',
+      shortcut: 'GoJS powered'
     },
     {
-      id: 'tip-right-click',
-      title: 'Context Menu',
-      description: 'Right-click on any node to access quick actions: Add Report, Delete, Change Color, Edit Properties.',
+      id: 'tip-gojs-undo',
+      title: 'GoJS Undo/Redo',
+      description: 'GoJS UndoManager tracks all changes. Press Ctrl+Z to undo, Ctrl+Y to redo. Works for all actions: add, delete, move, edit.',
+      targetSelector: null,
+      shortcut: 'Ctrl+Z / Ctrl+Y'
+    },
+    {
+      id: 'tip-gojs-zoom',
+      title: 'GoJS Zoom',
+      description: 'GoJS provides built-in zoom. Use mouse wheel, zoom buttons, or zoomToFit(). Zoom state is preserved in undo history.',
+      targetSelector: null,
+      shortcut: 'Mouse wheel'
+    },
+    {
+      id: 'tip-gojs-context',
+      title: 'GoJS Context Menu',
+      description: 'Right-click nodes for GoJS context menu. Menu items execute commands that are automatically undoable.',
       targetSelector: null,
       shortcut: 'Right-click'
     },
     {
-      id: 'tip-properties',
-      title: 'Properties Panel',
-      description: 'Select a node and use the Properties Panel to customize colors, add photos, set department, and more.',
+      id: 'tip-gojs-layout',
+      title: 'GoJS TreeLayout',
+      description: 'This org chart uses GoJS TreeLayout. It automatically arranges nodes hierarchically with proper spacing and alignment.',
+      targetSelector: null,
+      shortcut: 'Auto layout'
+    },
+    {
+      id: 'tip-gojs-binding',
+      title: 'GoJS Data Binding',
+      description: 'Node properties use GoJS data binding. Changes update the model automatically. Two-way binding keeps UI and data in sync.',
       targetSelector: '[data-properties-panel]',
-      shortcut: 'Select node'
+      shortcut: 'Auto sync'
     }
   ],
 
   bpmn: [
     {
-      id: 'tip-start-event',
-      title: 'Start Event',
-      description: 'Green circle represents the start of a process. Every workflow must begin with a start event.',
-      targetSelector: null,
-      shortcut: null
+      id: 'tip-gojs-templates',
+      title: 'GoJS Node Templates',
+      description: 'Each BPMN element uses a custom GoJS template. Templates define appearance, behavior, and data binding. Multiple templates in one diagram.',
+      targetSelector: '[data-gojs-canvas="bpmn"]',
+      shortcut: 'Template system'
     },
     {
-      id: 'tip-task',
-      title: 'Task Node',
-      description: 'Blue rectangles are tasks or activities. These represent work that needs to be done.',
+      id: 'tip-gojs-linking',
+      title: 'GoJS Linking Tool',
+      description: 'GoJS LinkingTool handles connections. Drag from node to node - GoJS routes links automatically, avoids nodes, and validates connections.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Drag to connect'
     },
     {
-      id: 'tip-gateway',
-      title: 'Gateway',
-      description: 'Orange diamonds are decision points. Use XOR gateways (X symbol) for exclusive choices.',
+      id: 'tip-gojs-layered',
+      title: 'GoJS LayeredDigraphLayout',
+      description: 'BPMN uses LayeredDigraphLayout for automatic arrangement. Nodes are placed in layers with proper spacing and alignment.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Auto layout'
     },
     {
-      id: 'tip-end-event',
-      title: 'End Event',
-      description: 'Red circle marks the end of a process. You can have multiple end events for different outcomes.',
+      id: 'tip-gojs-link-labels',
+      title: 'GoJS Link Labels',
+      description: 'Link labels are GoJS TextBlocks bound to link data. Double-click to edit. Labels move with links automatically.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Double-click label'
     }
   ],
 
   erd: [
     {
-      id: 'tip-entity',
-      title: 'Entity',
-      description: 'Each box represents a database table. Use singular nouns for entity names (e.g., "User" not "Users").',
-      targetSelector: null,
-      shortcut: null
+      id: 'tip-gojs-nested',
+      title: 'GoJS Nested Panels',
+      description: 'ERD entities use GoJS nested panels. Outer panel = entity box, inner panels = attributes. GoJS handles all panel sizing and layout.',
+      targetSelector: '[data-gojs-canvas="erd"]',
+      shortcut: 'Panel nesting'
     },
     {
-      id: 'tip-primary-key',
-      title: 'Primary Key',
-      description: 'Yellow diamond marker indicates a Primary Key. Each entity should have at least one PK.',
+      id: 'tip-gojs-shapes',
+      title: 'GoJS Custom Shapes',
+      description: 'Attribute markers use GoJS Shape objects with custom figures (Diamond, Rectangle, Circle). Bound to data properties.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Data-driven shapes'
     },
     {
-      id: 'tip-foreign-key',
-      title: 'Foreign Key',
-      description: 'Red square marker indicates a Foreign Key. These create relationships between tables.',
+      id: 'tip-gojs-binding',
+      title: 'GoJS Two-Way Binding',
+      description: 'Attribute names use makeTwoWay() binding. Edit in diagram or properties panel - changes sync automatically.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Two-way sync'
     },
     {
-      id: 'tip-export-sql',
-      title: 'Export to SQL',
-      description: 'Use the Export button and select SQL to automatically generate CREATE TABLE statements.',
+      id: 'tip-gojs-model',
+      title: 'GoJS Model Export',
+      description: 'Export uses model.toJson() to save all entities, attributes, and relationships. Import restores complete GoJS model state.',
       targetSelector: '[data-export-button]',
-      shortcut: 'Export → SQL'
+      shortcut: 'model.toJson()'
     }
   ],
 
   network: [
     {
-      id: 'tip-server',
-      title: 'Server',
-      description: 'Blue rectangles represent servers (web, app, database). Add IP addresses in properties.',
-      targetSelector: null,
-      shortcut: null
+      id: 'tip-gojs-force',
+      title: 'GoJS ForceDirectedLayout',
+      description: 'Network diagram uses ForceDirectedLayout. GoJS simulates physics: devices repel, connections attract. Automatic spacing and arrangement.',
+      targetSelector: '[data-gojs-canvas="network"]',
+      shortcut: 'Physics layout'
     },
     {
-      id: 'tip-router',
-      title: 'Router',
-      description: 'Orange diamonds are routers. These handle network routing and traffic direction.',
+      id: 'tip-gojs-forces',
+      title: 'GoJS Force Parameters',
+      description: 'ForceDirectedLayout uses configurable forces: springLength, electricalCharge, maxIterations. Adjust for different network densities.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Configurable'
     },
     {
-      id: 'tip-firewall',
-      title: 'Firewall',
-      description: 'Red pentagons represent firewalls. These provide network security and access control.',
+      id: 'tip-gojs-templates',
+      title: 'GoJS Device Templates',
+      description: 'Each device type has a GoJS template with specific Shape figure and color. Templates are reusable and consistent.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Template-based'
     },
     {
-      id: 'tip-connection',
-      title: 'Connections',
-      description: 'Draw connections between devices. Label with bandwidth (e.g., "1 Gbps", "100 Mbps").',
+      id: 'tip-gojs-links',
+      title: 'GoJS Network Links',
+      description: 'Connections are GoJS Links with labels. Links can be styled, labeled, and automatically route around nodes.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Smart routing'
     }
   ],
 
   gantt: [
     {
-      id: 'tip-task-bar',
-      title: 'Task Bar',
-      description: 'Each bar represents a task. Drag edges to resize duration, drag bar to change start date.',
-      targetSelector: null,
-      shortcut: 'Drag'
+      id: 'tip-gojs-date',
+      title: 'GoJS Date Conversion',
+      description: 'Gantt chart converts dates to coordinates. GoJS binding functions calculate pixel positions from dates (20px per day).',
+      targetSelector: '[data-gojs-canvas="gantt"]',
+      shortcut: 'Date → Pixel'
     },
     {
-      id: 'tip-dependency',
-      title: 'Dependencies',
-      description: 'Connect tasks with arrows to show dependencies. Task B depends on Task A means B starts after A finishes.',
+      id: 'tip-gojs-resizable',
+      title: 'GoJS Resizable Nodes',
+      description: 'Task bars are GoJS nodes with resizable=true. GoJS handles resize handles, constraints, and model updates automatically.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Drag edges'
     },
     {
-      id: 'tip-progress',
-      title: 'Progress Tracking',
-      description: 'Update progress percentage in Properties Panel. Visual progress bars show completion status.',
+      id: 'tip-gojs-tree',
+      title: 'GoJS TreeLayout',
+      description: 'Gantt uses TreeLayout for hierarchical task organization. Layout arranges tasks vertically, dependencies horizontally.',
+      targetSelector: null,
+      shortcut: 'Hierarchical'
+    },
+    {
+      id: 'tip-gojs-binding',
+      title: 'GoJS Progress Binding',
+      description: 'Progress bars use GoJS data binding. Progress value in model automatically updates visual bar display through binding.',
       targetSelector: '[data-properties-panel]',
-      shortcut: 'Properties → Progress'
+      shortcut: 'Data-driven'
     },
     {
-      id: 'tip-timeline',
-      title: 'Timeline',
-      description: 'Timeline shows dates from January to May 2024. Tasks are positioned based on start date and duration.',
+      id: 'tip-gojs-dependencies',
+      title: 'GoJS Dependency Links',
+      description: 'Dependencies are GoJS Links showing predecessor relationships. TreeLayout uses links to determine task hierarchy.',
       targetSelector: null,
-      shortcut: null
+      shortcut: 'Link-based'
     }
   ],
 
