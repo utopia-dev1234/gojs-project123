@@ -468,6 +468,7 @@ const ERDCanvas = () => {
           </button>
           <button
             onClick={exportImage}
+            data-export-button
             className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-sm"
           >
             <Download className="w-4 h-4" />
@@ -485,7 +486,7 @@ const ERDCanvas = () => {
 
       {/* Canvas */}
       <div className="flex-1 bg-gray-50 dark:bg-gray-900 relative">
-        <div ref={divRef} className="w-full h-full" />
+        <div ref={divRef} className="w-full h-full gojs-canvas" data-gojs-canvas="erd" />
       </div>
 
       {/* Legend & Status Bar */}

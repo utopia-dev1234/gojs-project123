@@ -9,6 +9,7 @@ const WalkMeLauncher = () => {
   const [showMenu, setShowMenu] = useState(false)
 
   const canvasNames = {
+    gojs_overview: 'GoJS Project Overview',
     orgchart: 'Organization Chart',
     bpmn: 'BPMN Workflow',
     erd: 'ERD Designer',
@@ -49,6 +50,18 @@ const WalkMeLauncher = () => {
               </div>
 
               <div className="space-y-2">
+                <button
+                  onClick={() => {
+                    startWalkthrough('gojs_overview')
+                    setShowMenu(false)
+                  }}
+                  className="w-full text-left px-3 py-2 text-sm bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition font-semibold"
+                >
+                  🎯 GoJS Overview
+                  {isCompleted('gojs_overview') && (
+                    <span className="ml-2 text-xs text-gray-500">✓ Completed</span>
+                  )}
+                </button>
                 <button
                   onClick={() => {
                     startWalkthrough(activeCanvas)

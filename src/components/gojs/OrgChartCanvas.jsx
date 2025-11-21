@@ -405,6 +405,7 @@ const OrgChartCanvas = () => {
         <div className="flex gap-2">
           <button
             onClick={addNode}
+            data-walkme-target="add-node-button"
             className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
           >
             <Plus className="w-4 h-4" />
@@ -444,6 +445,7 @@ const OrgChartCanvas = () => {
           </button>
           <button
             onClick={exportImage}
+            data-export-button
             className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-sm"
           >
             <Download className="w-4 h-4" />
@@ -461,7 +463,7 @@ const OrgChartCanvas = () => {
 
       {/* Canvas */}
       <div className="flex-1 bg-gray-50 dark:bg-gray-900 relative">
-        <div ref={divRef} className="w-full h-full" />
+        <div ref={divRef} className="w-full h-full gojs-canvas" data-gojs-canvas="orgchart" />
       </div>
 
       {/* Status Bar */}
