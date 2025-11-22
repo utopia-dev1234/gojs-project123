@@ -59,13 +59,140 @@ const Walkthrough = () => {
     }
   }, [currentStep, currentWalkthrough])
 
+  // Scroll to target element - MUST call hooks before conditional return
+  const steps = currentWalkthrough ? walkthroughSteps[currentWalkthrough] : null
+  const step = steps && Array.isArray(steps) ? steps[currentStep] : null
+  const [position, setPosition] = useState({ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' })
+
+  useEffect(() => {
+    if (!step) {
+      // Center if no step or no target
+      setPosition({ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' })
+      return
+    }
+
+    const calculatePosition = () => {
+      if (step.targetSelector) {
+        const element = document.querySelector(step.targetSelector)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          const walkthroughHeight = 280
+          const walkthroughWidth = 380
+          const viewportWidth = window.innerWidth
+          const viewportHeight = window.innerHeight
+          const padding = 20
+
+          let top, left
+          let preferredPosition = step.position || 'bottom'
+
+          // Calculate preferred position
+          switch (preferredPosition) {
+            case 'top':
+              top = rect.top - walkthroughHeight - padding
+              left = rect.left + rect.width / 2 - walkthroughWidth / 2
+              break
+            case 'bottom':
+              top = rect.bottom + padding
+              left = rect.left + rect.width / 2 - walkthroughWidth / 2
+              break
+            case 'left':
+              top = rect.top + rect.height / 2 - walkthroughHeight / 2
+              left = rect.left - walkthroughWidth - padding
+              break
+            case 'right':
+              top = rect.top + rect.height / 2 - walkthroughHeight / 2
+              left = rect.right + padding
+              break
+            default:
+              top = rect.bottom + padding
+              left = rect.left + rect.width / 2 - walkthroughWidth / 2
+          }
+
+          // Smart positioning: if preferred position would go off-screen, choose better position
+          // Check if bottom position would go off-screen
+          if (preferredPosition === 'bottom' && top + walkthroughHeight > viewportHeight - padding) {
+            // Try top instead
+            const topPosition = rect.top - walkthroughHeight - padding
+            if (topPosition >= padding) {
+              top = topPosition
+            } else {
+              // If top also doesn't fit, center vertically relative to element
+              top = Math.max(padding, rect.top + rect.height / 2 - walkthroughHeight / 2)
+            }
+          }
+          
+          // Check if top position would go off-screen
+          if (preferredPosition === 'top' && top < padding) {
+            // Try bottom instead
+            const bottomPosition = rect.bottom + padding
+            if (bottomPosition + walkthroughHeight <= viewportHeight - padding) {
+              top = bottomPosition
+            } else {
+              // If bottom also doesn't fit, center vertically relative to element
+              top = Math.max(padding, rect.top + rect.height / 2 - walkthroughHeight / 2)
+            }
+          }
+
+          // Keep dialog within horizontal bounds
+          if (left < padding) left = padding
+          if (left + walkthroughWidth > viewportWidth - padding) {
+            left = viewportWidth - walkthroughWidth - padding
+          }
+          
+          // Final vertical bounds check - ensure dialog is always visible
+          if (top < padding) top = padding
+          if (top + walkthroughHeight > viewportHeight - padding) {
+            top = viewportHeight - walkthroughHeight - padding
+          }
+
+          // If dialog still doesn't fit, center it on screen
+          if (top + walkthroughHeight > viewportHeight || top < 0) {
+            top = (viewportHeight - walkthroughHeight) / 2
+            left = (viewportWidth - walkthroughWidth) / 2
+          }
+
+          setPosition({
+            top: `${Math.max(padding, top)}px`,
+            left: `${Math.max(padding, left)}px`,
+            transform: 'none'
+          })
+
+          // Highlight element
+          element.style.outline = '3px solid #3b82f6'
+          element.style.outlineOffset = '2px'
+          element.style.transition = 'outline 0.3s'
+          
+          return () => {
+            element.style.outline = ''
+            element.style.outlineOffset = ''
+          }
+        }
+      }
+      
+      // Center if no target selector
+      setPosition({ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' })
+    }
+
+    // Scroll first, then calculate position after scroll completes
+    if (step.targetSelector) {
+      const element = document.querySelector(step.targetSelector)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        // Wait for scroll to complete before calculating position
+        setTimeout(() => {
+          calculatePosition()
+        }, 300)
+      } else {
+        calculatePosition()
+      }
+    } else {
+      calculatePosition()
+    }
+  }, [step, currentStep])
+
+  // Conditional returns AFTER all hooks
   if (!currentWalkthrough) return null
-
-  const steps = walkthroughSteps[currentWalkthrough]
   if (!steps || !Array.isArray(steps)) return null
-  
-  const step = steps[currentStep]
-
   if (!step) {
     // Walkthrough completed
     if (currentStep >= steps.length) {
@@ -74,75 +201,8 @@ const Walkthrough = () => {
     return null
   }
 
-  // Scroll to target element
-  useEffect(() => {
-    if (step.targetSelector) {
-      const element = document.querySelector(step.targetSelector)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        // Highlight element
-        element.style.outline = '3px solid #3b82f6'
-        element.style.outlineOffset = '2px'
-        element.style.transition = 'outline 0.3s'
-        
-        return () => {
-          element.style.outline = ''
-          element.style.outlineOffset = ''
-        }
-      }
-    }
-  }, [step, currentStep])
-
   const isFirstStep = currentStep === 0
   const isLastStep = currentStep === steps.length - 1
-
-  // Calculate position
-  const getPosition = () => {
-    if (step.targetSelector) {
-      const element = document.querySelector(step.targetSelector)
-      if (element) {
-        const rect = element.getBoundingClientRect()
-        const walkthroughHeight = 200
-        const walkthroughWidth = 350
-
-        switch (step.position) {
-          case 'top':
-            return {
-              top: rect.top - walkthroughHeight - 20,
-              left: rect.left + rect.width / 2 - walkthroughWidth / 2,
-            }
-          case 'bottom':
-            return {
-              top: rect.bottom + 20,
-              left: rect.left + rect.width / 2 - walkthroughWidth / 2,
-            }
-          case 'left':
-            return {
-              top: rect.top + rect.height / 2 - walkthroughHeight / 2,
-              left: rect.left - walkthroughWidth - 20,
-            }
-          case 'right':
-            return {
-              top: rect.top + rect.height / 2 - walkthroughHeight / 2,
-              left: rect.right + 20,
-            }
-          default:
-            return {
-              top: rect.bottom + 20,
-              left: rect.left + rect.width / 2 - walkthroughWidth / 2,
-            }
-        }
-      }
-    }
-    // Center if no target
-    return {
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-    }
-  }
-
-  const position = getPosition()
 
   return (
     <>
@@ -155,11 +215,11 @@ const Walkthrough = () => {
       {/* Walkthrough Step */}
       <div
         ref={stepRef}
-        className="fixed z-50 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-2 border-blue-500 max-w-sm"
+        className="fixed z-50 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-2 border-blue-500 max-w-sm transition-all duration-300"
         style={{
-          top: typeof position.top === 'string' ? position.top : `${position.top}px`,
-          left: typeof position.left === 'string' ? position.left : `${position.left}px`,
-          transform: typeof position.top === 'string' ? position.transform : 'none',
+          top: position.top,
+          left: position.left,
+          transform: position.transform,
         }}
       >
         {/* Header */}

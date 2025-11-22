@@ -10,10 +10,11 @@ const TaskList = () => {
     const saved = localStorage.getItem(`walkme_tasks_${activeCanvas}`)
     return saved ? JSON.parse(saved) : []
   })
-  
-  if (!showTaskList) return null
 
   const taskList = taskListsConfig[activeCanvas]
+  
+  // Conditional returns AFTER all hooks
+  if (!showTaskList) return null
   if (!taskList) return null
 
   const toggleTask = (taskId) => {

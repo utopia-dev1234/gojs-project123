@@ -8,12 +8,12 @@ const SmartTips = () => {
   const [activeTip, setActiveTip] = useState(null)
   const [tipPositions, setTipPositions] = useState({})
 
-  if (!showTips) return null
-
   const tips = smartTipsConfig[activeCanvas] || []
 
-  // Calculate tip positions
+  // Calculate tip positions - MUST call hooks before conditional return
   useEffect(() => {
+    if (!showTips) return
+    
     const positions = {}
     tips.forEach(tip => {
       if (tip.targetSelector) {
@@ -30,6 +30,9 @@ const SmartTips = () => {
     })
     setTipPositions(positions)
   }, [showTips, activeCanvas, tips])
+
+  // Conditional return AFTER all hooks
+  if (!showTips) return null
 
   // Show tip on hover
   const handleMouseEnter = (tipId) => {
